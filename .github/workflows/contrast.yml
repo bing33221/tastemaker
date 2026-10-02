@@ -1,0 +1,23 @@
+name: contrast
+
+on:
+  pull_request:
+    paths:
+      - .tastemaker/style-lock.md
+      - skills/tastemaker/scripts/check_contrast.py
+      - .github/actions/contrast-check/action.yml
+      - .github/workflows/contrast.yml
+  push:
+    branches: [main]
+    paths:
+      - .tastemaker/style-lock.md
+      - skills/tastemaker/scripts/check_contrast.py
+      - .github/actions/contrast-check/action.yml
+      - .github/workflows/contrast.yml
+
+jobs:
+  style-lock:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/contrast-check

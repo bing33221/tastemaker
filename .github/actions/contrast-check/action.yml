@@ -1,0 +1,19 @@
+name: Tastemaker contrast check
+description: Re-check every text-safe pairing recorded in a Tastemaker style lock
+
+inputs:
+  style-lock:
+    description: Path to the Tastemaker style lock in the checked-out project
+    required: false
+    default: .tastemaker/style-lock.md
+
+runs:
+  using: composite
+  steps:
+    - name: Verify text-safe color pairings
+      shell: bash
+      env:
+        STYLE_LOCK: ${{ inputs.style-lock }}
+      run: >-
+        python3 "$GITHUB_ACTION_PATH/../../../skills/tastemaker/scripts/check_contrast.py"
+        --style-lock "$STYLE_LOCK"
